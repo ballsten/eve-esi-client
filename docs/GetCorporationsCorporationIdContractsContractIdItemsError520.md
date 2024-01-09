@@ -1,0 +1,30 @@
+# GetCorporationsCorporationIdContractsContractIdItemsError520
+
+Error 520
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**error** | **str** | Error 520 message | [optional] 
+
+## Example
+
+```python
+from esi_client.models.get_corporations_corporation_id_contracts_contract_id_items_error520 import GetCorporationsCorporationIdContractsContractIdItemsError520
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GetCorporationsCorporationIdContractsContractIdItemsError520 from a JSON string
+get_corporations_corporation_id_contracts_contract_id_items_error520_instance = GetCorporationsCorporationIdContractsContractIdItemsError520.from_json(json)
+# print the JSON string representation of the object
+print GetCorporationsCorporationIdContractsContractIdItemsError520.to_json()
+
+# convert the object into a dict
+get_corporations_corporation_id_contracts_contract_id_items_error520_dict = get_corporations_corporation_id_contracts_contract_id_items_error520_instance.to_dict()
+# create an instance of GetCorporationsCorporationIdContractsContractIdItemsError520 from a dict
+get_corporations_corporation_id_contracts_contract_id_items_error520_form_dict = get_corporations_corporation_id_contracts_contract_id_items_error520.from_dict(get_corporations_corporation_id_contracts_contract_id_items_error520_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
