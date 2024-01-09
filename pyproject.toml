@@ -5,7 +5,7 @@ description = "EVE Swagger Interface"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
 readme = "README.md"
-repository = "https://github.com/ballsten/GIT_REPO_ID"
+repository = "https://github.com/ballsten/eve-esi-client"
 keywords = ["OpenAPI", "OpenAPI-Generator", "EVE Swagger Interface"]
 include = ["esi_client/py.typed"]
 
