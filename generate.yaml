@@ -1,6 +1,6 @@
 generatorName: python 
 inputSpec: https://esi.evetech.net/latest/swagger.json 
-generateSourceCodeOnly: true 
+generateSourceCodeOnly: false 
 packageName: esi_client 
 gitHost: github.com 
 gitUserId: ballsten 
