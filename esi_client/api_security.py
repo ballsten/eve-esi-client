@@ -42,30 +42,39 @@ class ApiSecurity:
         self.callback_uri = callback_uri
         self.port = urlparse(callback_uri).port or 80
         
-        self.http = PoolManager()
-        
-        self._get_jwt_public_key()
+        self._http = None # loaded lazily
+        self._signing_key = None # loaded lazily
         
     def _get_jwt_public_key(self):
         jwks_client = PyJWKClient('https://login.eveonline.com/oauth/jwks')
         self._signing_key = jwks_client.get_signing_key('JWT-Signature-Key')
+     
+     
+    def _get_auth_uri(self, scopes: [str]) -> str:
+        """
+        generates the authentication uri
+        """
+        client = WebApplicationClient(self.client_id)
+        code_verifier, code_challenge = generate_pkce_pair()
+        return client.prepare_request_uri(
+            "https://login.eveonline.com/v2/oauth/authorize",
+            redirect_uri=self.callback_uri,
+            scope=scopes,
+            state=self._generate_state(),
+            code_challenge=code_challenge,
+            code_challenge_method="S256"
+            )
         
-    def login(self, scopes=[]):
+    def _generate_state(self) -> str:
+        """
+        generate a random 8 character string
+        """
+        pass
+       
+    def login(self, scopes: [str] = []):
         with OAuthHttpServer(('', self.port), OAuthHttpHandler) as httpd:
-            client = WebApplicationClient(self.client_id)
-            code_verifier, code_challenge = generate_pkce_pair()
-            authUri = client.prepare_request_uri(
-                "https://login.eveonline.com/v2/oauth/authorize",
-                redirect_uri=self.callback_uri,
-                scope=scopes,
-                state="TODOgenerate",
-                code_challenge=code_challenge,
-                code_challenge_method="S256"
-                )
             
-            webbrowser.open(authUri, new=2)
-        
-            httpd.handle_request()
+            webbrowser.open(self._get_auth_uri(scopes), new=2)
             
             auth_code = httpd.authorization_code
             
