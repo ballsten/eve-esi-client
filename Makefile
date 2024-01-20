@@ -18,6 +18,11 @@ $(VENV)/scripts/activate:
 generate:
 	openapi-generator-cli generate -c generate.yaml
 
+
+# run tests
+test:
+	pytest
+	
 # remove venv directory
 clean:
 	rm -rf $(VENV)
