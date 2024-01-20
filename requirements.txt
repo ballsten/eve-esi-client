@@ -5,4 +5,4 @@ pydantic >= 2
 typing-extensions >= 4.7.1
 oauthlib >= 3.2.2
 pkce >= 1.0.3
-jwt >= 2.8.0
+PyJwt >= 2.8.0
