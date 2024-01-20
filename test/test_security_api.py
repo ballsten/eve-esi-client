@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import MagicMock, Mock
+from unittest.mock import Mock, patch
 
 from urllib.parse import urlparse, parse_qs
 
@@ -18,7 +18,7 @@ class TestSecurityApi(unittest.TestCase):
     ### test cases for _get_auth_uri
     
     # url
-    def test_generate_uri_correct_host(self) -> None:  
+    def test_generate_uri_correct_host(self) -> None:
         uri = self.api_security._get_auth_uri([])
         parsed_uri = urlparse(uri)
         
@@ -79,10 +79,11 @@ class TestSecurityApi(unittest.TestCase):
         self.assertEqual(state, qs['state'][0])
            
     # code_challenge
-    def test_generate_url_code_challenge(self) -> None:
-        code_challenge = "test_code_challenge"
+    @patch('esi_client.api_security.generate_pkce_pair')
+    def test_generate_url_code_challenge(self, mocks: Mock) -> None:
+        code_challenge = "test_code_challenge"    
         
-        # need to workout how to mock a module when i get internet
+        mocks.return_value = ('', code_challenge)    
         
         uri = self.api_security._get_auth_uri([])
         qs = parse_qs(urlparse(uri).query)
@@ -102,7 +103,7 @@ class TestSecurityApi(unittest.TestCase):
         
     ### _generate_state
     def test_generate_state(self) -> None:
-        pass
+        self.skipTest("Not Implemented")
     
     
 class TestNotSureIfWeNeed(unittest.TestCase):    
