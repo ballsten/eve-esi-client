@@ -4,7 +4,7 @@ PYTHON = py
 .PHONY = init clean generate test
 
 # install requirements.txt & test-requirements.txt
-init: $(VENV)/scripts/activate requirements.txt
+init: $(VENV)/scripts/activate requirements.txt test-requirements.txt
 	$(VENV)/scripts/pip install -r requirements.txt
 	$(VENV)/scripts/pip install -r test-requirements.txt
 
@@ -18,11 +18,10 @@ $(VENV)/scripts/activate:
 generate:
 	openapi-generator-cli generate -c generate.yaml
 
-
 # run tests
 test:
 	pytest
-	
+
 # remove venv directory
 clean:
 	rm -rf $(VENV)
